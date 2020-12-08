@@ -1,0 +1,10 @@
+#testing regex and python, used on website interpreter - aka copy-pasted
+
+import re
+x = open('filepath', 'rt').read()
+r1 = r'<textarea.*?>(.*?)</textarea>'
+s1 = re.findall(r1, s, re.DOTALL)[1] # just by inspection
+r2 = r'\[(.*?)\]'
+s2 = re.findall(r2, s1)
+for u in s2:
+    print(u)
