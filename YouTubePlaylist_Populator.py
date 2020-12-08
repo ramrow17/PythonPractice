@@ -19,11 +19,11 @@
 # 1) using batches with Google's API doesn't work for ALL Google APIs, only
 #       a select few - so of course the playlistItems got the boot
 #
-# 2) Regex isn't perfect, so stripping and extracting are necessary for less bugs
+# 2) Regex output isn't perfect, so stripping and extracting are necessary for less bugs
 #
 # 3) File paths and IDs are hidden away in different folders, so that sketchy 
 #    things don't happen when this code is ripped, but who is actually gonna 
-#    go through all this and read it? :)
+#    go through all this and read it? :-)
 #
 #   For the "credentials" - if you're too lazy to edit the code in main they are
 #       here as follows:
@@ -34,7 +34,6 @@
 #
 
 import re
-import sys
 import os
 
 import google_auth_oauthlib.flow
@@ -91,7 +90,7 @@ def Strip_Links_List(List_Links):
 
 
 
-def InsertToPLaylist(VideoIDs, PlaylistID, ClientSecret):
+def InsertToPLaylist(VideoIDs, PlaylistID):
     # Disable OAuthlib's HTTPS verification when running locally.
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 

@@ -16,7 +16,6 @@ import googleapiclient.errors
 
 VideoIDs = ['Lb2EmdLOZ10', '_KO50UmcZl8', '47Plg93oJ1M']
 PlaylistID = "PL7qhHmCShbjwQY7ncowP_i8mG5zS_8Crb"
-ClientSecret = r"C:\Users\Romiro\Documents\client_secret.json"
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
