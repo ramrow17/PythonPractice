@@ -31,6 +31,14 @@
 #       Line 2) OutPutFile - Not necessary, but used for documentating all links found
 #       Line 3) PlaylistID - You need this for the YouTube API
 #
+#
+# December 8th - All testing has passed, the manual insertations have passed through the API
+#   and the logging along with it has been successful. 
+#   Finally issues - I want to write all the HTTP Responses to be written to a file for proper
+#   documentation of all the processes. 
+#
+#
+
 
 import re
 import sys
