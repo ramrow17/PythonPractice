@@ -33,6 +33,7 @@
 #
 
 import re
+import sys
 import os
 
 import google_auth_oauthlib.flow
@@ -97,7 +98,8 @@ def InsertToPLaylist(VideoIDs, PlaylistID):
     api_version = "v3"
     client_secrets_file = "client_secret.json" # I swear I didn't name this
 
-    daf = open("LogFile.txt", "w")
+    #daf = open("LogFile.txt", "w")
+
 
     # Get client secrets getting acquired
     flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
@@ -122,9 +124,10 @@ def InsertToPLaylist(VideoIDs, PlaylistID):
                 }
             ) 
         response = request.execute()
-        print("Inserted Video ID: ", VideoID)
-        daf.write(writing)
-        daf.write('\n')
+        print(response)
+        print("\nInserted Video ID: ", VideoID)
+        #daf.write(response.to_json())
+        #daf.write('\n')
 
     # you know, cause testing...
     print("YouTube Playlist updated!")
