@@ -133,7 +133,8 @@ def InsertToPLaylist(VideoIDs, PlaylistID):
             ) 
         response = request.execute()
         print(response)
-        print("\nInserted Video ID: ", VideoID)
+        print("Inserted Video ID: ", VideoID)
+        print("\n\n")
         #daf.write(response.to_json())
         #daf.write('\n')
 
