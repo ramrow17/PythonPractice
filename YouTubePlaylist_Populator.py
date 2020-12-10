@@ -1,4 +1,4 @@
-#               Ram's YouTube Playlist Auto-Inserter
+#                   Ram's YouTube Playlist Populator
 # __________________________________________________________________________________
 #   The idea behind this is that I have a discord chat full of YouTube links
 #     I wanted to get those links and auto populate them into a playlist.
@@ -85,13 +85,13 @@ def StrippingHTML(LocationPath, OutputFile):
 
 def Strip_Links_List(List_Links):
     VideoIDs = [];
-    # 11:11 make a wish
+    # example: www.youtube.com/watch?v=urvideoID69
     regg = r'/?v=.{11}?'
 
     for ID in List_Links:
         match = re.search(regg, ID)
         if match:
-            # First we extract the VideoID
+            # First we extract the VideoID (from v=urvideoID69)
             temp = match.group(0)
             temp = temp[2:] 
 
@@ -174,12 +174,10 @@ def main():
     # some people called me a madman...
     VideoIDList = Strip_Links_List(StrippingHTML(LocationPath, OutputFile))
 
-    print("Finished list - going to insert function...")
+    
+    print("Finished list - Calling YouTube API...")
 
     InsertToPLaylist(VideoIDList, PlaylistID)
     
-
-
-
 
 main()
