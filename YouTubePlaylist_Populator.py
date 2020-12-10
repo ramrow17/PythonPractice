@@ -37,6 +37,10 @@
 #   Finally issues - I want to write all the HTTP Responses to be written to a file for proper
 #   documentation of all the processes. 
 #
+# December 10th - Logging file creation is now functioning and integrated, this seems to be the
+#   end of the road in terms of basic functionality - we are done! Will update if anything is added..
+#
+#
 #
 
 
@@ -106,9 +110,6 @@ def InsertToPLaylist(VideoIDs, PlaylistID):
     api_version = "v3"
     client_secrets_file = "client_secret.json" # I swear I didn't name this
 
-    #daf = open("LogFile.txt", "w")
-
-
     # Get client secrets getting acquired
     flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
         client_secrets_file, scopes)
@@ -117,7 +118,7 @@ def InsertToPLaylist(VideoIDs, PlaylistID):
         api_service_name, api_version, credentials=credentials)
 
     # Batch creation doesn't work entirely right with 
-    # YouTube Data API v3 - doing manual executes for insert
+    # YouTube Data API v3 - doing manual executes for inserts
     for VideoID in VideoIDs:
         request = youtube.playlistItems().insert(
                 part="snippet,status",
@@ -132,15 +133,28 @@ def InsertToPLaylist(VideoIDs, PlaylistID):
                 }
             ) 
         response = request.execute()
-        print(response)
-        print("Inserted Video ID: ", VideoID)
-        print("\n\n")
-        #daf.write(response.to_json())
-        #daf.write('\n')
 
-    # you know, cause testing...
+        print("Inserted Video ID: ", VideoID)
+        Logging(VideoID, response)
+        
+
+        
+    # Just lettin you know :-)
     print("YouTube Playlist updated!")
         
+
+def Logging(Vid, Res):
+    orgn = sys.stdout
+
+    # Was getting kinda screwy without the right encoding >:(
+    daf = open('LogFile.txt', 'a', encoding='utf-8')
+    sys.stdout = daf
+    print("Inserted Video ID: ", Vid)
+    print(Res) # The actual logging from API Response
+    print('\n')
+    sys.stdout = orgn # Reverting before returning
+
+
 
 
 def main():
@@ -157,12 +171,12 @@ def main():
     OutputFile = OutputFile.strip('\n')
     PlaylistID = PlaylistID.strip('\n')
 
-    Links = StrippingHTML(LocationPath, OutputFile)
-    
-    VideoList = Strip_Links_List(Links)
+    # some people called me a madman...
+    VideoIDList = Strip_Links_List(StrippingHTML(LocationPath, OutputFile))
 
     print("Finished list - going to insert function...")
-    InsertToPLaylist(VideoList, PlaylistID)
+
+    InsertToPLaylist(VideoIDList, PlaylistID)
     
 
 
